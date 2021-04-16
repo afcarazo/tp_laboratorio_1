@@ -57,7 +57,7 @@ int main()
             }
             break;
 
-        case 3: //obtencion de las operaciones de las funciones matematicas
+        case 3: //obtencion de operaciones de las funciones matematicas
             if (flagNumeroUno==1 && flagNumeroDos==1)
             {
                 resultadoSuma = sumar(numeroUno, numeroDos);
@@ -67,7 +67,7 @@ int main()
                 okFactorialUno = factorial (numeroUno,&resultadoFactorialNumeroUno);
                 okFactorialDos = factorial (numeroDos,&resultadoFactorialNumeroDos);
                 activarFlag(&flagCalculado);
-                printf("\n\nCalculando...\n\n");
+                printf("\nCalculando...\n\n");
             }
             else
             {
@@ -84,11 +84,11 @@ int main()
             system("pause");
             break;
 
-        case 4: // se muestran resultados
+        case 4: // evalucion de posibles errores y presentacion de resultados
 
             if(flagCalculado==0)
             {
-                printf("\n Primero deberias calcular las operaciones \n\n");
+                printf("\nPrimero deberias calcular las operaciones \n\n");
             }
             else
             {
@@ -151,13 +151,14 @@ int main()
 
         case 5: //salir
 
-        	 printf("\nEsta seguro de que desea salir? s/n ");
-             fflush(stdin);
-             salir= getchar();
-        	 if(salir=='s'){
-        		 printf("\n\nUsted ha salido del programa. Muchas gracias por usar la calculadora!!\n\n");
-        		  system("pause");
-        	 }
+            printf("\nEsta seguro de que desea salir? s/n ");
+            fflush(stdin);
+            salir= getchar();
+            if(salir=='s')
+            {
+                printf("\n\nUsted ha salido del programa. Muchas gracias por usar la calculadora!!\n\n");
+                system("pause");
+            }
 
             break;
 
@@ -166,7 +167,7 @@ int main()
             system("pause");
             break;
         }
-    system("cls");
+        system("cls");
     }
 
     while (salir != 's');

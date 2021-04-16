@@ -68,6 +68,5 @@ int factorial(int a, int *b)
             }
         }
     }
-return todoOk;
+    return todoOk;
 }
-
