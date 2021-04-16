@@ -26,10 +26,12 @@ int main()
     int resultadoFactorialNumeroDos;
     float numeroUno;
     float numeroDos;
-    float flagNumeroUno = 0;
-    float flagNumeroDos = 0;
-    float flagCalculado = 0;
+    int flagNumeroUno=0;
+    int flagNumeroDos=0;
+    int flagCalculado=0;
     int okDivision;
+    int okFactorialUno;
+    int okFactorialDos;
     char salir ='n';
 
     do
@@ -42,7 +44,7 @@ int main()
             activarFlag(&flagNumeroUno);
             break;
         case 2: //obtencion del segundo operando
-            if (flagNumeroUno != 0)
+            if (flagNumeroUno==1)
             {
                 printf("\nIngrese el segundo operando: ");
                 scanf("%f", &numeroDos);
@@ -58,12 +60,13 @@ int main()
         case 3: //obtencion de las operaciones de las funciones matematicas
             if (flagNumeroUno==1 && flagNumeroDos==1)
             {
-                activarFlag(&flagCalculado);
                 resultadoSuma = sumar(numeroUno, numeroDos);
                 resultadoResta = resta(numeroUno, numeroDos);
-                okDivision=dividirRobusta(numeroUno, numeroDos,&resultadoDivision);
+                okDivision=dividir(numeroUno, numeroDos,&resultadoDivision);
                 resultadoMultiplicacion = multiplicacion(numeroUno, numeroDos);
-                factorial(numeroUno, numeroDos, &resultadoFactorialNumeroUno,&resultadoFactorialNumeroDos);
+                okFactorialUno = factorial (numeroUno,&resultadoFactorialNumeroUno);
+                okFactorialDos = factorial (numeroDos,&resultadoFactorialNumeroDos);
+                activarFlag(&flagCalculado);
                 printf("\n\nCalculando...\n\n");
             }
             else
@@ -102,22 +105,22 @@ int main()
                         printf("\nNo es posible dividir por cero\n");
                     }
 
-                    if (numeroUno >= 0 && numeroDos >= 0)
+                    if (okFactorialUno && okFactorialDos )
                     {
                         printf(	"\nEl factorial de %.0f es: %d y El factorial de %0.f es: %d\n", numeroUno,resultadoFactorialNumeroUno,numeroDos,resultadoFactorialNumeroDos);
                     }
                     else
                     {
-                        if(numeroUno<0 && numeroDos>=0)
+                        if(okFactorialUno==0  && okFactorialDos!=0)
                         {
                             printf("\nEl factorial del numero uno no esta definido ya que es negativo\n");
-                            printf("\nEl factorial de %.2f es: %d\n", numeroDos,resultadoFactorialNumeroDos);
+                            printf("\nEl factorial de %.0f es: %d\n", numeroDos,resultadoFactorialNumeroDos);
                         }
                         else
                         {
-                            if(numeroDos<0 && numeroUno>=0)
+                            if(okFactorialUno!=0 && okFactorialDos==0)
                             {
-                                printf("\nEl factorial de %.2f es: %d", numeroUno, resultadoFactorialNumeroUno);
+                                printf("\nEl factorial de %.0f es: %d", numeroUno, resultadoFactorialNumeroUno);
                                 printf("\n\nEl factorial del numero dos no esta definido ya que es negativo\n");
                             }
                             else
@@ -148,11 +151,12 @@ int main()
 
         case 5: //salir
 
-        	 printf("\nEsta seguro de que desea salir? n/s ");
+        	 printf("\nEsta seguro de que desea salir? s/n ");
              fflush(stdin);
              salir= getchar();
         	 if(salir=='s'){
         		 printf("\n\nUsted ha salido del programa. Muchas gracias por usar la calculadora!!\n\n");
+        		  system("pause");
         	 }
 
             break;
@@ -162,7 +166,7 @@ int main()
             system("pause");
             break;
         }
-        system("cls");
+    system("cls");
     }
 
     while (salir != 's');

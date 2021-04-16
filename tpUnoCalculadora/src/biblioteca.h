@@ -10,21 +10,21 @@
 
 /** \brief evalua el primer ingreso de operandos
  *
- * \param c float* puntero de bandera se asigna valor 1 en el primer ingreso
+ * \param c float* puntero se asigna valor 1 en el primer ingreso
  * \return void
  *
  */
-void activarFlag(float *c);
+void activarFlag(int *c);
 
 /** \brief reinicia el valor de las banderas cuando se hayan mostrado los resultados del ingreso
  *
- * \param b float* puntero de bandera se le asigna un 0 a la bandera que corresponde al primer numero
- * \param x float* puntero de bandera se le asigna un 0 a la bandera que corresponde al segundo numero
- * \param f float* puntero de bandera se le asigna un 0 a la bandera cuando se realizaron las operaciones
+ * \param b float* puntero se le asigna un 0 a la bandera que corresponde al primer numero
+ * \param x float* puntero se le asigna un 0 a la bandera que corresponde al segundo numero
+ * \param f float* puntero se le asigna un 0 a la bandera cuando se realizaron las operaciones
  * \return void
  *
  */
-void resetFlag(float *b, float *x, float* f);
+void resetFlag(int *b, int *x, int* f);
 
 /** \brief realiza la suma de dos numeros
  *
@@ -53,25 +53,24 @@ float resta(float a, float b);
  */
 float multiplicacion(float a, float b);
 
-/** \brief realiza la division de dos eneteros
+/** \brief realiza la division de dos enteros
  *
- * \param a int dividendo de la operacion
- * \param b int divisor de la operacion
+ * \param a float dividendo de la operacion
+ * \param b float divisor de la operacion
  * \return int devuelve 1 si pudo hacer la division o 0 sino lo pudo hacer
  *
  */
-int dividirRobusta(int a, int b, float* c);
+int dividir(float a, float b, float* c);
 
-/** \brief realiza el factorial de ambos numeros
+
+/** \brief calcula el factorial de un numero
  *
- * \param operadorUno int primer operando al cual se calcula el factorial
- * \param operadorDos int segundo operando al cual se calcula el factorial
- * \param factorialUno int* puntero del resultado del primer operando
- * \param factorialDos int* puntero del resultado del segundo operando
- * \return void
+ * \param a int numero a factorizar
+ * \param b int* puntero al resultado
+ * \return int devuelve 1 si pudo realizar la operacion 0 sino lo pudo realizar
  *
  */
-void factorial(int operadorUno, int operadorDos, int *factorialUno, int *factorialDos);
+int factorial(int a, int *b);
 
 /** \brief muestra el menu de opciones
  *

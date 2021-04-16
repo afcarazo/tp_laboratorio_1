@@ -24,13 +24,13 @@ float resta(float a, float b)
     return resta;
 }
 
-int dividirRobusta(int a, int b, float* c)
+int dividir(float a, float b, float* c)
 {
     int todoOk =0;
 
     if(b!=0 && c!= NULL)
     {
-        *c = (float)a/b;
+        *c = a/b;
         todoOk=1;
     }
 
@@ -46,29 +46,28 @@ float multiplicacion(float a, float b)
 }
 
 
-void factorial(int operadorUno, int operadorDos, int *factorialUno, int *factorialDos)
-
+int factorial(int a, int *b)
 {
-    float factorialPrimerOperando = 1;
-    float factorialSegundoOperando = 1;
+    int todoOk = 0;
+    int fact = 1;
 
-    if(operadorUno==1 || operadorUno==0 || operadorDos==1 || operadorDos==0 )
+    if(a==0 && b!= NULL)
     {
-        *factorialUno =1;
-        *factorialDos =1;
+        *b =1;
+        todoOk=1;
     }
     else
     {
-        for (float i = 1; i <= operadorUno; i++)
+        if(a>0 && b!= NULL)
         {
-            factorialPrimerOperando = factorialPrimerOperando * i;
-        }
-        for (float k = 1; k <= operadorDos; k++)
-        {
-            factorialSegundoOperando = factorialSegundoOperando * k;
+            for(int i=1; i<=a; i++)
+            {
+                fact= fact *i;
+                *b = fact;
+                todoOk=1;
+            }
         }
     }
-
-    *factorialUno = factorialPrimerOperando;
-    *factorialDos = factorialSegundoOperando;
+return todoOk;
 }
+

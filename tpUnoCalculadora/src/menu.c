@@ -11,11 +11,11 @@
 #include <conio.h>
 #include "biblioteca.h"
 
-void activarFlag(float *c) {
+void activarFlag(int *c) {
 	*c = 1;
 }
 
-void resetFlag(float *b, float *x, float* f) {
+void resetFlag(int *b, int *x, int* f) {
 	*b = 0;
 	*x = 0;
 	*f = 0;
@@ -36,7 +36,7 @@ int menu(float a, float b, float flagNumeroUno, float flagNumeroDos)
 	}
 
 	if (flagNumeroDos == 0) {
-		printf("\n 2. Ingresar 2do operando (B=x)\n");
+		printf("\n 2. Ingresar 2do operando (B=y)\n");
 	} else {
 		printf("\n 2. Ingresar 2do operando (B=%.2f)\n", b);
 	}
