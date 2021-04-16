@@ -1,10 +1,8 @@
 /*
  ============================================================================
- Name        : trabajoPracticoCalculadora.c
- Author      : Agustina Carazo
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Name        : tpUnoCalculadora.c
+ Author      : Agustina Florencia Carazo
+ division    : 1°A
  ============================================================================
  */
 
