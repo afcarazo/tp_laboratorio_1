@@ -102,48 +102,34 @@ int main()
                     {
                         printf("\nNo es posible dividir por cero\n");
                     }
-
+                    printf("\nEl resultado de %.2f*%.2f es: %.2f\n", numeroUno,numeroDos, resultadoMultiplicacion);
                     if (okFactorialUno && okFactorialDos )
                     {
-                        printf(	"\nEl factorial de %.0f es: %d y El factorial de %0.f es: %d\n", numeroUno,resultadoFactorialNumeroUno,numeroDos,resultadoFactorialNumeroDos);
+                        printf(	"\nEl factorial de %.0f es: %d y El factorial de %0.f es: %d\n\n", numeroUno,resultadoFactorialNumeroUno,numeroDos,resultadoFactorialNumeroDos);
                     }
                     else
                     {
                         if(okFactorialUno==0  && okFactorialDos!=0)
                         {
                             printf("\nEl factorial del numero uno no esta definido ya que es negativo\n");
-                            printf("\nEl factorial de %.0f es: %d\n", numeroDos,resultadoFactorialNumeroDos);
+                            printf("\nEl factorial de %.0f es: %d\n\n", numeroDos,resultadoFactorialNumeroDos);
                         }
                         else
                         {
                             if(okFactorialUno!=0 && okFactorialDos==0)
                             {
                                 printf("\nEl factorial de %.0f es: %d", numeroUno, resultadoFactorialNumeroUno);
-                                printf("\n\nEl factorial del numero dos no esta definido ya que es negativo\n");
+                                printf("\n\nEl factorial del numero dos no esta definido ya que es negativo\n\n");
                             }
                             else
                             {
-                                printf("\nEl factorial de numeros negativos no esta definido \n");
+                                printf("\nEl factorial de numeros negativos no esta definido\n\n");
                             }
                         }
                     }
-
-                    printf("\nEl resultado de %.2f*%.2f es: %.2f\n\n", numeroUno,numeroDos, resultadoMultiplicacion);
                     resetFlag(&flagNumeroUno, &flagNumeroDos, &flagCalculado);
                 }
-                else
-                {
-                    if(flagNumeroUno==1 && flagNumeroDos==0)
-                    {
-                        printf("\nPrimero deberias ingresar el valor del segundo operando\n\n");
-                    }
-                    else
-                    {
-                        printf("\nPrimero deberias ingresar los valores de los dos operandos para poder mostrar resultados\n\n");
-                    }
-                }
             }
-
             system("pause");
             break;
 
@@ -154,14 +140,14 @@ int main()
             salir= getchar();
             if(salir=='s')
             {
-                printf("\n\nUsted ha salido del programa. Muchas gracias por usar la calculadora!!\n\n");
+                printf("\nUsted ha salido del programa. Muchas gracias por usar la calculadora!!\n\n");
                 system("pause");
             }
 
             break;
 
         default: // Error
-            printf("\n\nLa opcion ingresada no existe. Reingrese la opcion\n\n");
+            printf("\nLa opcion ingresada no existe. Reingrese la opcion.\n\n");
             system("pause");
             break;
         }
