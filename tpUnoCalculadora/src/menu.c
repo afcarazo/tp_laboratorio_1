@@ -13,18 +13,20 @@
 
 void activarFlag(int *c)
 {
-	if(c!= NULL){
-    *c = 1;
-	}
+    if(c!= NULL)
+    {
+        *c = 1;
+    }
 }
 
 void resetFlag(int *b, int *x, int* f)
 {
-	if(b != NULL && x != NULL && f != NULL){
-    *b = 0;
-    *x = 0;
-    *f = 0;
-	}
+    if(b != NULL && x != NULL && f != NULL)
+    {
+        *b = 0;
+        *x = 0;
+        *f = 0;
+    }
 }
 
 int menu(float a, float b, float flagNumeroUno, float flagNumeroDos)
