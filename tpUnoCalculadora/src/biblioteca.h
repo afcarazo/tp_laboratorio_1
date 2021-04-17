@@ -10,7 +10,7 @@
 
 /** \brief evalua el ingreso de operandos y que se hayan realizado los calculos asignando un 1
  *
- * \param c float* puntero a la bandera corrrespondiente
+ * \param c float* puntero a bandera
  * \return void
  *
  */
@@ -33,14 +33,14 @@ void resetFlag(int *b, int *x, int* f);
  *
  * \param a float primer operando a sumar
  * \param b float segundo operando a sumar
- * \return float retorna resultado de la suma de los dos operandos
+ * \return float retorna resultado de la suma de los operandos
  *
  */
 float sumar(float a, float b);
 
 
 
-/** \brief realliza la resta de dos numeros flotantes
+/** \brief realiza la resta de dos numeros flotantes
  *
  * \param a float primer operando a restar
  * \param b float segundo operando a restar
@@ -64,17 +64,17 @@ float multiplicacion(float a, float b);
  *
  * \param a float dividendo de la operacion
  * \param b float divisor de la operacion
- * \return int devuelve 1 si pudo hacer de lo contario 0
+ * \return int devuelve 1 si pudo hacer la operacion de lo contario regresa 0
  *
  */
 int dividir(float a, float b, float* c);
 
 
-/** \brief calcula el factorial de un numero entero no mayor a 16, incluye factorial de 0
+/** \brief calcula el factorial de un numero entero no mayor a 16 contempla factorial de 0
  *
  * \param a int numero a factorizar
  * \param b int* puntero al resultado
- * \return int devuelve 1 si pudo realizar la operacion de lo contario 0
+ * \return int devuelve 1 si pudo realizar la operacion de lo contario regresa 0
  *
  */
 int factorial(int a, int *b);
@@ -82,11 +82,11 @@ int factorial(int a, int *b);
 
 /** \brief muestra el menu de opciones
  *
- * \param a float muestra valor del primer operando
- * \param b float muestra valor del segundo operando
+ * \param a float muestra el valor del primer operando
+ * \param b float muestra el valor del segundo operando
  * \param flagNumeroUno float evalua si se trata del primer ingreso del primer operando
  * \param flagNumeroDos float evalua si se trata del primer ingreso del segundo operando
- * \return int  devuelve la opcion seleccionada
+ * \return int devuelve la opcion seleccionada
  *
  */
 int menu(float a, float b, float flagNumeroUno, float flagNumeroDos);
