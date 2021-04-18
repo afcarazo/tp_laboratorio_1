@@ -156,6 +156,6 @@ int main()
 
     while (salir != 's');
 
-    return 0;
+	return EXIT_SUCCESS;
 }
 
