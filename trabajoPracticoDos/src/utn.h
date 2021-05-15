@@ -45,7 +45,6 @@ int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError, 
  */
 int utn_getChar(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
 
-
 /**
  * \brief Solicita un nombre al usuario, luego de verificarlo devuelve el resultado
  * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
@@ -57,77 +56,6 @@ int utn_getChar(char* pResultado, int longitud,char* mensaje, char* mensajeError
  *
  */
 int utn_getNombre(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
-
-/**
- * \brief Solicita un texto al usuario, luego de verificarlo devuelve el resultado
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \param longitud Es la longitud del array resultado
- * \param mensaje Es el mensaje a ser mostrado
- * \param mensajeError Es el mensaje de Error a ser mostrado
- * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo el numero flotante y -1 si no
- *
- */
-int utn_getCaracterImprimible(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
-
-/**
- * \brief Solicita un mail al usuario, luego de verificarlo devuelve el resultado
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \param longitud Es la longitud del array resultado
- * \param mensaje Es el mensaje a ser mostrado
- * \param mensajeError Es el mensaje de Error a ser mostrado
- * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo el numero flotante y -1 si no
- *
- */
-int utn_getMail(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
-/**
- * \brief Solicita un cuil al usuario, luego de verificarlo devuelve el resultado
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \param longitud Es la longitud del array resultado
- * \param mensaje Es el mensaje a ser mostrado
- * \param mensajeError Es el mensaje de Error a ser mostrado
- * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo el numero flotante y -1 si no
- *
- */
-int utn_getCuilCuit(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
-
-
-/**
- * \brief Solicita una respuesta al usuario, luego de verificarlo devuelve el resultado
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \param longitud Es la longitud del array resultado
- * \param mensaje Es el mensaje a ser mostrado
- * \param mensajeError Es el mensaje de Error a ser mostrado
- * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo si o no y -1 si no
- *
- */
-int utn_getRespuesta(char* pRespuesta,int len, char* mensaje, char* mensajeError,int reintentos);
-
-/**
- * \brief Solicita una descripcion al usuario, luego de verificarlo devuelve el resultado
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \param longitud Es la longitud del array resultado
- * \param mensaje Es el mensaje a ser mostrado
- * \param mensajeError Es el mensaje de Error a ser mostrado
- * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo el numero flotante y -1 si no
- *
- */
-int utn_getDescripcion(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
-/**
- * \brief Solicita un DNI al usuario, luego de verificarlo devuelve el resultado
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \param longitud Es la longitud del array resultado
- * \param mensaje Es el mensaje a ser mostrado
- * \param mensajeError Es el mensaje de Error a ser mostrado
- * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo el numero flotante y -1 si no
- *
- */
-int utn_getDni(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
 
 
 #endif /* UTN_H_ */

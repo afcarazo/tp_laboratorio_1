@@ -115,9 +115,9 @@ int findEmployeeById(Employee* list, int len,int id)
 }
 
 
-void showEmployee(Employee list)
+void showEmployee(Employee anEmployee)
 {
-    printf("%2d  %10s %10s     %2.f     %d", list.id, list.name,list.lastName,list.salary,list.sector);
+    printf("%2d %10s %10s     %2.f     %d", anEmployee.id, anEmployee.name,anEmployee.lastName,anEmployee.salary,anEmployee.sector);
 }
 
 
@@ -126,8 +126,8 @@ int printEmployees(Employee* list, int length)
     int flag=1;
     int retorno=-1;
     printf("\n---------------------------------------------\n");
-    printf("                EMPLOYEES\n\n");
-    printf("ID     NAME     LASTNAME     SALARY   SECTOR ");
+    printf("                  EMPLEADOS                  \n\n");
+    printf("ID     NOMBRE     APELLIDO     SALARIO   SECTOR ");
     printf("\n---------------------------------------------\n\n");
     if(list!=NULL && length>0)
     {

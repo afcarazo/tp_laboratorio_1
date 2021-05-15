@@ -17,20 +17,8 @@ static int esFlotante(char* cadena);
 static int getFloat(float* pResultado);
 static int getString(char* cadena, int longitud); //myGets
 static int esNombre(char* cadena,int longitud);
-static int getCaracterImprimible(char* pResultado,int longitud);
-static int esCaracterImprimible(char* cadena,int longitud);
-static int esMail(char* cadena,int longitud);
-static int getMail(char* pResultado, int longitud);
-static int esCuil(char* cadena,int longitud);
-static int getCuil(char* pResultado, int longitud);
 static int getChar(char* pResultado, int len);
 static int esLetra(char* cadena, int len);
-static int getRespuesta(char* pRespuesta, int len);
-static int esRespuesta(char* cadena, int len);
-static int getDescripcion(char* pResultado, int longitud);
-static int esDescripcion(char* cadena,int longitud);
-static int getDni(char* pResultado, int longitud);
-
 
 /**
  * \brief 	Lee de stdin hasta que encuentra un '\n' o hasta que haya copiado en cadena
@@ -109,9 +97,7 @@ static int esNumerica(char* cadena, int limite)
                 retorno = 0;
                 break;
             }
-            //CONTINUE
         }
-        //BREAK
     }
     return retorno;
 }
@@ -164,7 +150,7 @@ static int getFloat(float* pResultado)
 /**
  * \brief Verifica si la cadena ingresada es flotante
  * \param cadena Cadena de caracteres a ser analizada
- * \return Retorna 1 (vardadero) si la cadena es flotante y 0 (falso) si no lo es
+ * \return Retorna 1 si la cadena es flotante y 0 si no lo es
  *
  */
 static int esFlotante(char* cadena)
@@ -227,7 +213,7 @@ int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError, 
 /**
  * \brief Obtiene un string valido como nombre
  * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \return Retorna 0 (EXITO) si se obtiene un numero flotante y -1 (ERROR) si no
+ * \return Retorna 0 (EXITO) si se obtiene una cadena de caracteres valida y -1 (ERROR) si no
  *
  */
 static int getNombre(char* pResultado, int longitud)
@@ -251,7 +237,7 @@ static int getNombre(char* pResultado, int longitud)
 /**
  * \brief Verifica si la cadena ingresada es un nombre valido
  * \param cadena Cadena de caracteres a ser analizada
- * \return Retorna 1 (verdadero) si la cadena es valida y 0 (falso) si no lo es
+ * \return Retorna 1 si la cadena es valida y 0 si no lo es
  *
  */
 static int esNombre(char* cadena,int longitud)
@@ -293,250 +279,6 @@ int utn_getNombre(char* pResultado, int longitud,char* mensaje, char* mensajeErr
     return retorno;
 }
 
-/**
- * \brief Verifica si la cadena ingresada es un texto valido
- * \param cadena Cadena de caracteres a ser analizada
- * \return Retorna 1 (verdadero) si la cadena es valida y 0 (falso) si no lo es
- *
- */
-static int esCaracterImprimible(char* cadena,int longitud)
-{
-    int i=0;
-    int retorno = 1;
-
-    if(cadena != NULL && longitud > 0)
-    {
-        for(i=0 ; cadena[i] != '\0' && i < longitud; i++)
-        {
-            if((cadena[i] < ' ' || cadena[i] > '~' ))
-            {
-                retorno = 0;
-                break;
-            }
-        }
-    }
-    return retorno;
-}
-
-/**
- * \brief Solicita un texto al usuario, luego de verificarlo devuelve el resultado
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \param longitud Es la longitud del array resultado
- * \param mensaje Es el mensaje a ser mostrado
- * \param mensajeError Es el mensaje de Error a ser mostrado
- * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo el numero flotante y -1 si no
- *
- */
-static int getCaracterImprimible(char* pResultado, int longitud)
-{
-    int retorno=-1;
-    char buffer[4096];
-
-    if(pResultado != NULL)
-    {
-        if(	getString(buffer,sizeof(buffer))==0 && esCaracterImprimible(buffer,sizeof(buffer)) && strnlen(buffer,sizeof(buffer))<longitud)
-        {
-            strncpy(pResultado,buffer,longitud);
-            retorno = 0;
-        }
-    }
-    return retorno;
-}
-
-
-int utn_getCaracterImprimible(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
-{
-    char bufferString[4096];
-    int retorno = -1;
-    while(reintentos>=0)
-    {
-        reintentos--;
-        printf("%s",mensaje);
-        if(getCaracterImprimible(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) < longitud )
-        {
-            strncpy(pResultado,bufferString,longitud);
-            retorno = 0;
-            break;
-        }
-        printf("%s",mensajeError);
-    }
-    return retorno;
-}
-
-/**
- * \brief Verifica si la cadena ingresada es un mail valido
- * \param cadena Cadena de caracteres a ser analizada
- * \return Retorna 1 (verdadero) si la cadena es valida y 0 (falso) si no lo es
- *
- */
-static int esMail(char* cadena,int longitud)
-{
-    int i=0;
-    int retorno = 1;
-    int contadorArroba=0;
-    char aux;
-
-    if(cadena != NULL && longitud > 0)
-    {
-        for(i=0 ; cadena[i] != '\0' && i < longitud; i++)
-        {
-            if(cadena[i] >= 'A' && cadena[i] <= 'Z')
-            {
-                aux = cadena[i];
-                cadena[i] = tolower(aux);
-                continue;
-            }
-            if(cadena[i] == '.' || cadena[i] == '_')
-            {
-                continue;
-            }
-            if((cadena[i] < '0' || cadena[i] > '9') && (cadena[i] < 'a' || cadena[i] > 'z'))
-            {
-                if(cadena[i] == '@' && contadorArroba == 0)
-                {
-                    contadorArroba++;
-                }
-                else
-                {
-                    retorno = 0;
-                    break;
-                }
-            }
-
-        }
-    }
-    return retorno;
-}
-
-/**
- * \brief Solicita un mail al usuario, luego de verificarlo devuelve el resultado
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \param longitud Es la longitud del array resultado
- * \param mensaje Es el mensaje a ser mostrado
- * \param mensajeError Es el mensaje de Error a ser mostrado
- * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo el numero flotante y -1 si no
- *
- */
-static int getMail(char* pResultado, int longitud)
-{
-    int retorno=-1;
-    char buffer[4096];
-
-    if(pResultado != NULL)
-    {
-        if(	getString(buffer,sizeof(buffer))==0 && esMail(buffer,sizeof(buffer)) && strnlen(buffer,sizeof(buffer))<longitud)
-        {
-            strncpy(pResultado,buffer,longitud);
-            retorno = 0;
-        }
-    }
-    return retorno;
-}
-
-
-int utn_getMail(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
-{
-    char bufferString[4096];
-    int retorno = -1;
-    while(reintentos>=0)
-    {
-        reintentos--;
-        printf("%s",mensaje);
-        if(getMail(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) < longitud )
-        {
-            strncpy(pResultado,bufferString,longitud);
-            retorno = 0;
-            break;
-        }
-        printf("%s",mensajeError);
-    }
-    return retorno;
-}
-
-/**
- * \brief Verifica si la cadena ingresada es un cuil valido
- * \param cadena Cadena de caracteres a ser analizada
- * \return Retorna 1 (verdadero) si la cadena es valida y 0 (falso) si no lo es
- *
- */
-static int esCuil(char* cadena,int longitud)
-{
-    int i=0;
-    int retorno = 1;
-    int contadorGuion=0;
-    if(cadena != NULL && longitud > 0)
-    {
-        for(i=0 ; cadena[i] != '\0' && i < longitud; i++)
-        {
-            if((cadena[i] < '0' || cadena[i] > '9'))
-            {
-                if(cadena[i] == '-' && contadorGuion < 2)
-                {
-                    contadorGuion++;
-                }
-                else
-                {
-                    retorno = 0;
-                    break;
-                }
-            }
-
-        }
-    }
-    return retorno;
-}
-
-/**
- * \brief Solicita un cuil al usuario, luego de verificarlo devuelve el resultado
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \param longitud Es la longitud del array resultado
- * \param mensaje Es el mensaje a ser mostrado
- * \param mensajeError Es el mensaje de Error a ser mostrado
- * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo el numero flotante y -1 si no
- *
- */
-static int getCuil(char* pResultado, int longitud)
-{
-    int retorno=-1;
-    char buffer[4096];
-
-    if(pResultado != NULL)
-    {
-        if(	getString(buffer,sizeof(buffer))==0 && esCuil(buffer,sizeof(buffer)) && strnlen(buffer,sizeof(buffer))<longitud)
-        {
-            strncpy(pResultado,buffer,longitud);
-            retorno = 0;
-        }
-    }
-    return retorno;
-}
-
-
-int utn_getCuilCuit(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
-{
-    char bufferString[4096];
-    int retorno = -1;
-    int a;
-    while(reintentos>=0)
-    {
-        reintentos--;
-        printf("%s",mensaje);
-        if(getCuil(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) < longitud )
-        {
-            strncpy(pResultado,bufferString,longitud);
-            retorno = 0;
-            break;
-        }
-        a = getCuil(bufferString,sizeof(bufferString));
-        printf("%d",a);
-        printf("%s",mensajeError);
-    }
-    return retorno;
-} //20-94213754-1
-
 
 int utn_getChar(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
 {
@@ -558,7 +300,7 @@ int utn_getChar(char* pResultado, int longitud,char* mensaje, char* mensajeError
     return retorno;
 }
 /**
- * \brief Obtine una letra
+ * \brief Obtiene una letra
  * \param pValor Puntero al espacio de memoria donde se dejara el resultado de la funcion
  * \return Retorna 0 (EXITO) si se obtiene un numero entero y -1 (ERROR) si no
  *
@@ -582,7 +324,7 @@ static int getChar(char* pResultado, int len)
 /**
  * \brief Verifica si es una letra
  * \param pValor Puntero de caracter a ser analizado
- * \return Retorna 1 (verdadero) si es una letra, 0 (falso) si no lo es y -1 en caso de error
+ * \return Retorna 1 si es una letra, 0 si no lo es
  *
  */
 static int esLetra(char* cadena, int len)
@@ -604,185 +346,5 @@ static int esLetra(char* cadena, int len)
 }
 
 
-int utn_getRespuesta(char* pRespuesta,int len, char* mensaje, char* mensajeError,int reintentos)
-{
-    int retorno = -1;
-    char bufferRespuesta[3];
-    if(pRespuesta != NULL && len > 0 && mensaje != NULL && mensajeError != NULL && reintentos > 0)
-    {
-        while(reintentos>=0)
-        {
-            reintentos--;
-            printf("%s",mensaje);
-            if(!getRespuesta(bufferRespuesta,sizeof(bufferRespuesta)) && strnlen(bufferRespuesta,sizeof(bufferRespuesta)) < len )
-            {
-                strncpy(pRespuesta,bufferRespuesta,len);
-                retorno = 0;
-                break;
-            }
-            printf("%s",mensajeError);
-        }
-    }
-    return retorno;
-}
 
-static int getRespuesta(char* pRespuesta, int len)
-{
-    char bufferRespuesta[3];
-    int retorno = -1;
-    if(pRespuesta != NULL && len > 0)
-    {
-        if(!getString(bufferRespuesta,sizeof(bufferRespuesta)) && esRespuesta(bufferRespuesta,sizeof(bufferRespuesta)) && strnlen(bufferRespuesta,sizeof(bufferRespuesta))<len)
-        {
-            strncpy(pRespuesta,bufferRespuesta,len);
-            retorno = 0;
-        }
-    }
-    return retorno;
-}
-
-static int esRespuesta(char* cadena, int len)
-{
-    int retorno = -1;
-    int i;
-    char aux;
-    if(cadena != NULL && len > 0)
-    {
-        for(i=0 ; cadena[i]!='\0' && i < len; i++)
-        {
-            retorno = 1;
-            if(cadena[i] != 's' && cadena[i] != 'i' && cadena[i] != 'n' && cadena[i] != 'o')
-            {
-                if(cadena[i]=='S' ||  cadena[i]=='I' ||  cadena[i]=='N' ||  cadena[i]=='O')
-                {
-                    aux = cadena[i];
-                    cadena[i] = tolower(aux);
-                    continue;
-                }
-                else
-                {
-                    retorno = 0;
-                    break;
-                }
-            }
-        }
-    }
-    return retorno;
-}
-
-
-/**
- * \brief Obtiene un string valido como descripcion
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \return Retorna 0 (EXITO) si se obtiene un numero flotante y -1 (ERROR) si no
- *
- */
-static int getDescripcion(char* pResultado, int longitud)
-{
-    int retorno=-1;
-    char buffer[4096];
-
-    if(pResultado != NULL)
-    {
-        if(	getString(buffer,sizeof(buffer))==0 &&
-                esDescripcion(buffer,sizeof(buffer)) &&
-                strnlen(buffer,sizeof(buffer))<longitud)
-        {
-            strncpy(pResultado,buffer,longitud);
-            retorno = 0;
-        }
-    }
-    return retorno;
-}
-
-/**
- * \brief Verifica si la cadena ingresada es una descripcion valida
- * \param cadena Cadena de caracteres a ser analizada
- * \return Retorna 1 (verdadero) si la cadena es valida y 0 (falso) si no lo es
- *
- */
-static int esDescripcion(char* cadena,int longitud)
-{
-    int i=0;
-    int retorno = 1;
-
-    if(cadena != NULL && longitud > 0)
-    {
-        for(i=0 ; cadena[i] != '\0' && i < longitud; i++)
-        {
-            if(cadena[i] != '.' && cadena[i] != ' ' && (cadena[i] < 'A' || cadena[i] > 'Z' ) && (cadena[i] < 'a' || cadena[i] > 'z' ) && (cadena[i] < '0' || cadena[i] > '9' ) )
-            {
-                retorno = 0;
-                break;
-            }
-        }
-    }
-    return retorno;
-}
-
-int utn_getDescripcion(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
-{
-    char bufferString[4096];
-    int retorno = -1;
-    while(reintentos>=0)
-    {
-        reintentos--;
-        printf("%s",mensaje);
-        if(getDescripcion(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) < longitud )
-        {
-            strncpy(pResultado,bufferString,longitud);
-            retorno = 0;
-            break;
-        }
-        printf("%s",mensajeError);
-    }
-    return retorno;
-}
-
-
-/**
- * \brief Obtiene un string valido como DNI
- * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * \return Retorna 0 (EXITO) si se obtiene un numero flotante y -1 (ERROR) si no
- *
- */
-static int getDni(char* pResultado, int longitud)
-{
-    int retorno=-1;
-    char buffer[4096];
-
-    if(pResultado != NULL)
-    {
-        if(	getString(buffer,sizeof(buffer))==0 &&
-                esNumerica(buffer,sizeof(buffer)) &&
-                strnlen(buffer,sizeof(buffer))<longitud)
-        {
-            strncpy(pResultado,buffer,longitud);
-            retorno = 0;
-        }
-    }
-    return retorno;
-}
-
-
-
-
-int utn_getDni(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
-{
-    char bufferString[4096];
-    int retorno = -1;
-    while(reintentos>=0)
-    {
-        reintentos--;
-        printf("%s",mensaje);
-        if(getDni(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) < longitud )
-        {
-            strncpy(pResultado,bufferString,longitud);
-            retorno = 0;
-            break;
-        }
-        printf("%s",mensajeError);
-    }
-    return retorno;
-}
 
