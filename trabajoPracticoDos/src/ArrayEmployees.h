@@ -77,7 +77,7 @@ int employeeValidation(Employee *list, int len, int id, char name[],char lastNam
  * \param list Employee* Pointer to array of employees
  * \param len int Array length
  * \param id int ID to search
- * \return Return employee index position or (-1) if error [Invalid length or NULL
+ * \return Return employee index if ok or (-1) if error [Invalid length or NULL
 pointer received or employee not found]
  *
  */
@@ -135,7 +135,7 @@ int modifyEmployee(Employee* list, int length);
 
 /** \brief show modification menu
  *
- * \param list Employee* list Employee* Pointer to array of employees
+ * \param list Employee* Pointer to array of employees
  * \param length int Array length
  * \param index int index of the employee to modify
  * \return int  Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok

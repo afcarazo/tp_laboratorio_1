@@ -57,7 +57,7 @@ int addEmployee(Employee *list, int len, int id, char name[],char lastName[],flo
     int index;
     if(list != NULL && len>0 && name!=NULL && lastName!=NULL&& salary>0)
     {
-        index= getEmpty(list,len);
+        index= getEmpty(list,len); //posicion vacia donde se cargaran los datos
         if(index!=-1)
         {
             list[index].id= id;
@@ -83,9 +83,9 @@ int employeeValidation(Employee *list, int len, int id, char name[],char lastNam
          if(!utn_getNombre(name,NAME_LEN,"\nIngrese nombre: ","\nERROR\n",2)&&
             !utn_getNombre(lastName,LASTNAME_LEN,"\nIngrese apellido: ","\nERROR\n",2)&&
             !utn_getNumeroFlotante(&salary,"\nIngrese salario: ","\nERROR\n",10000,500000,2)&&
-            !utn_getNumero(&sector,"\nIngrese sector: ","\nERROR\n",101,110,2))
+            !utn_getNumero(&sector,"\nIngrese sector: ","\nERROR\n",101,110,2))//se realizan las validaciones de los parametros para luego agregarlos al array
     {
-        if(addEmployee(list,len,id,name,lastName,salary,sector)==0)
+        if(addEmployee(list,len,id,name,lastName,salary,sector)==0)//se agregan los parametros validados al array
         {
             retorno=0;
         }
@@ -117,7 +117,7 @@ int findEmployeeById(Employee* list, int len,int id)
 
 void showEmployee(Employee anEmployee)
 {
-    printf("%2d %10s %10s     %2.f     %d", anEmployee.id, anEmployee.name,anEmployee.lastName,anEmployee.salary,anEmployee.sector);
+    printf("%2d %10s %10s     %9.2f     %d", anEmployee.id, anEmployee.name,anEmployee.lastName,anEmployee.salary,anEmployee.sector);
 }
 
 
@@ -125,24 +125,24 @@ int printEmployees(Employee* list, int length)
 {
     int flag=1;
     int retorno=-1;
-    printf("\n---------------------------------------------\n");
+    printf("\n-----------------------------------------------\n");
     printf("                  EMPLEADOS                  \n\n");
     printf("ID     NOMBRE     APELLIDO     SALARIO   SECTOR ");
-    printf("\n---------------------------------------------\n\n");
+    printf("\n-----------------------------------------------\n\n");
     if(list!=NULL && length>0)
     {
         for(int i=0; i<length; i++)
         {
             if(list[i].isEmpty==0)
             {
-                showEmployee(list[i]);
+                showEmployee(list[i]); // muestra empleado activo
                 printf("\n");
                 flag=0;
             }
         }
 
         retorno=0;
-        if(flag)
+        if(flag)   //no se encontro ningun empleado activo
         {
             printf("      No hay empleados que mostrar\n");
             retorno=-1;
@@ -165,17 +165,16 @@ int modifyEmployee(Employee* list, int length)
     {
         if(printEmployees(list,length)==0)
         {
-            utn_getNumero(&id,"\nIngrese ID del empleado: ","\nERROR\n",0,1000,2);
+            utn_getNumero(&id,"\nIngrese ID del empleado: ","\nERROR\n",0,1000,2);//pide id del empleado a modificar
             index=findEmployeeById(list,length,id);
-            while(index==-1)
+            while(index==-1) //si el id no es correcto se lo vuelve a pedir hasta que sea valido
             {
                 printf("\n El ID ingresado no es valido. \n");
                 utn_getNumero(&id,"\nIngrese ID del empleado: ","\nERROR\n",0,1000,2);
                 index=findEmployeeById(list,length,id);
             }
-            if(subMenuModify(list,length,index)!=-1)
+            if(subMenuModify(list,length,index)!=-1)//menu de modificaciones
             {
-
                 retorno=0;
             }
 
@@ -201,7 +200,7 @@ int subMenuModify(Employee* list, int length,int index)
         printf("\nIngrese opcion: ");
         scanf("%d",&opcion);
 
-        switch(opcion)
+        switch(opcion) //menu de modificaciones si los parametros son validos se modifican en el array original
         {
         case 1:
 
@@ -242,6 +241,7 @@ int subMenuModify(Employee* list, int length,int index)
             break;
         default:
             printf("La opcion ingresada no es valida. \n");
+            break;
         }
 
     }
@@ -256,7 +256,7 @@ int removeEmployee(Employee* list, int len, int id)
     {
         for(int i=0; i<len; i++)
         {
-            if(list[i].id==id && list[i].isEmpty==0)
+            if(list[i].id==id && list[i].isEmpty==0)//si el id coincide y ademas es un empleado activo se procede a dar de baja
             {
                 list[i].isEmpty=1;
                 break;
@@ -277,10 +277,10 @@ int bajaEmpleado(Employee* list, int len)
     {
         system("cls");
         printf("\nBaja empleado:");
-        printEmployees(list,len);
+        printEmployees(list,len); //muestra empleados activos
         utn_getNumero(&id,"\nIngrese ID del empleado a dar de baja: ","\nERROR\n",0,1000,2);
         indexEmployee=findEmployeeById(list,len,id);
-        while(indexEmployee==-1)
+        while(indexEmployee==-1) //si el id no es valido se lo pide hasta que lo sea
         {
             utn_getNumero(&id,"\nNO hay un empleado con ese ID. Reingrese ID del empleado a dar de baja: ","\nERROR\n",0,1000,2);
             indexEmployee=findEmployeeById(list,len,id);
@@ -303,7 +303,7 @@ int sortEmployees(Employee* list, int len, int order)
         {
             for(int j=i+1; j<len; j++)
             {
-                if( (order==1 && (list[i].sector>list[j].sector))|| (list[i].sector==list[j].sector && strcmp(list[i].lastName,list[j].lastName)>0))
+                if( (order==1 && (list[i].sector>list[j].sector))|| (list[i].sector==list[j].sector && (strcmp(list[i].lastName,list[j].lastName)>0)))//ordenamiento creciente
                 {
                     auxList= list[i];
                     list[i]=list[j];
@@ -311,7 +311,7 @@ int sortEmployees(Employee* list, int len, int order)
                 }
                 else
                 {
-                    if((order==0&& ( list[i].sector<list[j].sector)) || (list[i].sector==list[j].sector && strcmp(list[i].lastName,list[j].lastName)<0))
+                    if((order==0 && ( list[i].sector<list[j].sector)) || (list[i].sector==list[j].sector && (strcmp(list[i].lastName,list[j].lastName)<0)))//ordenamiento decreciente
                     {
                         auxList= list[i];
                         list[i]=list[j];
@@ -337,7 +337,7 @@ int totalSalary(Employee* list, int len)
     {
         for(int i=0; i<len; i++)
         {
-            if(list[i].isEmpty==0)
+            if(list[i].isEmpty==0)//se acumulan salarios y se cuentan los empleados activos
             {
                 acumuladorSueldo+=list[i].salary;
                 contadorEmpleados++;
@@ -346,7 +346,7 @@ int totalSalary(Employee* list, int len)
         sueldoPromedio=acumuladorSueldo/contadorEmpleados;
         for(int e=0; e<len; e++)
         {
-            if(list[e].isEmpty==0&&list[e].salary>sueldoPromedio)
+            if(list[e].isEmpty==0&&list[e].salary>sueldoPromedio)//empleados que superan el promedio calculado
             {
                 contadorSuperanPromedio++;
             }
@@ -378,7 +378,7 @@ int reportsMenu(Employee* list, int len)
 
         }
 
-        switch(opcion)
+        switch(opcion) //menu de reportes
         {
         case 1:
             printf("\nDesea ordenar de manera: \n");
@@ -386,16 +386,17 @@ int reportsMenu(Employee* list, int len)
             printf("\n1. Creciente \n");
             if(!utn_getNumero(&upDown,"\nIngrese opcion: ","\nERROR la opcion no es valida\n\n", 0,1,2))
             {
-                sortEmployees(list,len,upDown);
-                printEmployees(list,len);
+                sortEmployees(list,len,upDown); // se ordenan empleado de la forma seleccionada
+                printEmployees(list,len); //se muestran los empleados ordenados
             }
 
             break;
         case 2:
-            totalSalary(list,len);
+            totalSalary(list,len); //salario total - promedio -empleados que superan promedio
             break;
         default:
             printf("\nLa opcion ingresada es invalida\n\n");
+            break;
         }
         todoOk=0;
     }

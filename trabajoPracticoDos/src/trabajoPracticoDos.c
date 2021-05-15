@@ -98,7 +98,6 @@ int main(void) {
 	           case 4:
 	               if(flagAlta==1)
 	               {
-	                   printf("Informar\n");
 	                   reportsMenu(arrayEmployees,ELEMENTS);
 	               }
 	               else

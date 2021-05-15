@@ -31,11 +31,11 @@ static int esLetra(char* cadena, int len);
 static int getString(char* cadena, int longitud)
 {
     int retorno=-1;
-    char bufferString[4096]; // *****************************
+    char bufferString[4096];
 
     if(cadena != NULL && longitud > 0)
     {
-        fflush(stdin); // Linux:__fpurge(stdin); Mac: fpurge(stdin);
+        fflush(stdin);
         if(fgets(bufferString,sizeof(bufferString),stdin) != NULL)
         {
             if(bufferString[strnlen(bufferString,sizeof(bufferString))-1] == '\n')
@@ -74,7 +74,7 @@ static int getInt(int* pResultado)
 }
 
 /**
- * \brief Verifica si la cadena ingresada es numerica
+ * \brief Verifica si es numerica
  * \param cadena Cadena de caracteres a ser analizada
  * \return Retorna 1 (verdadero) si la cadena es numerica, 0 (falso) si no lo es y -1 en caso de error
  *
@@ -126,7 +126,7 @@ int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo
 }
 
 /**
- * \brief Verifica si la cadena ingresada es flotante
+ * \brief Verifica si es flotante
  * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
  * \return Retorna 0 (EXITO) si se obtiene un numero flotante y -1 (ERROR) si no
  *
