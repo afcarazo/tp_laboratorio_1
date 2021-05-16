@@ -79,7 +79,7 @@ int employeeValidation(Employee *list, int len, int id, char name[],char lastNam
     printf("\n\n----------------------\n");
     printf("     Alta empleado"          );
     printf("\n----------------------\n\n");
-    printf("Legajo: %d\n", id);
+    printf("ID: %d\n", id);
          if(!utn_getNombre(name,NAME_LEN,"\nIngrese nombre: ","\nERROR\n",2)&&
             !utn_getNombre(lastName,LASTNAME_LEN,"\nIngrese apellido: ","\nERROR\n",2)&&
             !utn_getNumeroFlotante(&salary,"\nIngrese salario: ","\nERROR\n",10000,500000,2)&&
@@ -277,7 +277,7 @@ int bajaEmpleado(Employee* list, int len)
     {
         system("cls");
         printf("\nBaja empleado:");
-        printEmployees(list,len); //muestra empleados activos
+        if( printEmployees(list,len)==0){ //muestra empleados activos
         utn_getNumero(&id,"\nIngrese ID del empleado a dar de baja: ","\nERROR\n",0,1000,2);
         indexEmployee=findEmployeeById(list,len,id);
         while(indexEmployee==-1) //si el id no es valido se lo pide hasta que lo sea
@@ -286,10 +286,10 @@ int bajaEmpleado(Employee* list, int len)
             indexEmployee=findEmployeeById(list,len,id);
         }
         if(removeEmployee(list,len,id)==0)
-        {
-            retorno=0;
-        }
-
+             {
+                 retorno=0;
+             }
+       }
     }
     return retorno;
 }
