@@ -280,7 +280,7 @@ int bajaEmpleado(Employee* list, int len)
         if( printEmployees(list,len)==0){ //muestra empleados activos
         utn_getNumero(&id,"\nIngrese ID del empleado a dar de baja: ","\nERROR\n",0,1000,2);
         indexEmployee=findEmployeeById(list,len,id);
-        while(indexEmployee==-1) //si el id no es valido se lo pide hasta que lo sea
+        while(indexEmployee==-1)
         {
             utn_getNumero(&id,"\nNO hay un empleado con ese ID. Reingrese ID del empleado a dar de baja: ","\nERROR\n",0,1000,2);
             indexEmployee=findEmployeeById(list,len,id);
