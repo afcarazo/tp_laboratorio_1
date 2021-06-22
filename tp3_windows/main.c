@@ -200,6 +200,8 @@ int main()
                         salir = 's';
                     }
                 }
+            }else{
+            	salir = 's';
             }
 
             system("pause");
